@@ -1,0 +1,30 @@
+.
+├── eslint.config.js
+├── folder_structure.txt
+├── index.html
+├── package-lock.json
+├── package.json
+├── public
+│   └── vite.svg
+├── README.md
+├── src
+│   ├── App.tsx
+│   ├── assets
+│   │   └── react.svg
+│   ├── components
+│   ├── index.css
+│   ├── layout
+│   │   └── index.tsx
+│   ├── main.tsx
+│   ├── pages
+│   │   ├── IndexPage
+│   │   │   └── index.tsx
+│   │   └── SingleNewsPage
+│   │       └── index.tsx
+│   └── vite-env.d.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+9 directories, 19 files
