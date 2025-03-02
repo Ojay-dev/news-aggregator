@@ -1,16 +1,11 @@
-import { Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router';
-import HomePage from './pages/IndexPage';
+import { BrowserRouter as Router } from 'react-router';
+import RouterConfig from './router';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route index element={<HomePage />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Router>
+      <RouterConfig />
+    </Router>
   );
 }
 
