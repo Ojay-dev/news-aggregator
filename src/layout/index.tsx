@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router';
 import NewsLogo from '../assets/images/news1-logo.png';
 import HamburgerIcon from '../assets/svgs/dashboard-square-edit.svg';
+import CloseIcon from '../assets/svgs/cancel-icon.svg';
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // Navigation items
   const navItems = [
     { to: '/', label: 'Home' },
@@ -14,13 +18,16 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
     { to: '/category/technology', label: 'Technology' },
   ];
 
+  // Toggle menu function
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="px-5">
       <header>
-        {/* Header Container */}
         <div className="relative mx-auto max-w-xl lg:max-w-[1440px]">
           <div className="relative flex items-center justify-center py-12">
-            {/* Centered Logo */}
             <NavLink
               to="/"
               className="absolute left-1/2 flex -translate-x-1/2 transform justify-center pt-6"
@@ -59,9 +66,47 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
 
         {/* Hamburger Icon (Visible on screens < 1024px) */}
-        <button className="absolute top-12 right-5 z-50 lg:hidden">
-          <img src={HamburgerIcon} alt="Menu" className="h-6 w-6" />
+        <button
+          className="absolute top-12 right-5 z-50 lg:hidden"
+          onClick={toggleMenu} // Toggle menu on click
+        >
+          <img
+            src={isMenuOpen ? CloseIcon : HamburgerIcon} // Toggle between Hamburger and Close icons
+            alt="Menu"
+            className="h-6 w-6"
+          />
         </button>
+
+        {/* Mobile Menu (Visible on screens < 1024px) */}
+        <div
+          className={`fixed inset-0 z-40 bg-white transition-transform duration-300 ease-in-out lg:hidden ${
+            isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="mt-24 flex flex-col items-center gap-y-6">
+            {navItems.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.to}
+                className={({ isActive }) =>
+                  `font-inter text-center text-base font-medium ${
+                    isActive ? 'text-[#0307E4]' : 'text-[#A6A6A6]'
+                  }`
+                }
+                onClick={toggleMenu}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+
+            <div className="mt-10 flex flex-col items-center gap-y-6">
+              <button className="font-inter text-base text-[#0307E4]">Sign in</button>
+              <button className="font-inter rounded-3xl border border-[#0307E4] px-6 py-3 text-base text-[#0307E4]">
+                Subscribe $0.50/mo
+              </button>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Page Content */}
