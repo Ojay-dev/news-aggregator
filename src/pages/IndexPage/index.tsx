@@ -2,8 +2,25 @@ import DefaultLayout from '../../layout';
 import FilterPill from '../../components/FilterPill';
 import HeadlineNewsCard from '../../components/HeadlineNewsCard';
 import NewsCard from '../../components/NewsCard';
+import { useEffect, useState } from 'react';
+import { fetchNewsAPI } from '../../services/newsApiAdapter';
+import { Article } from '../../types/article';
 
 const HomePage = () => {
+  const [headlineNews, setHeadlineNews] = useState<Article>({
+    id: '',
+    title: '',
+    description: '',
+    url: '',
+    imageUrl: '',
+    publishedAt: '',
+    source: '',
+    category: '',
+    author: '',
+  });
+
+  const [otherNews, setOtherNews] = useState<Article[]>([]); // State for the remaining articles
+
   const sources = [
     { label: 'BBC' },
     { label: 'CNN', icon: 'src/assets/svgs/cancel-circle.svg' },
@@ -13,23 +30,19 @@ const HomePage = () => {
     { label: 'THE GUARDIAN' },
   ];
 
-  const mainArticle = {
-    imageUrl: 'https://placehold.co/1280x720',
-    title: 'Apple Unveils AI-Powered iPhone at Global Event',
-    description:
-      'Apple has announced its latest iPhone model featuring AI-powered tools and a revamped camera system to enhance user experience.',
-    tags: ['5m read', '1h ago', 'Technology', 'From TechCrunch'],
-    link: '/article/123',
-  };
+  useEffect(() => {
+    getNewsApi();
+  }, []);
 
-  const topStories = Array.from({ length: 3 }).map(() => ({
-    imageUrl: 'https://placehold.co/1700x1540',
-    title: 'Tesla’s Stock Surges 12% After Record Sales Announcement',
-    description:
-      'Apple has announced its latest iPhone model featuring AI-powered tools and a revamped camera system to enhance user experience.',
-    tags: ['Technology', 'From TechCrunch'],
-    link: '/article/123',
-  }));
+  const getNewsApi = async () => {
+    const response = await fetchNewsAPI();
+    console.log(response);
+
+    if (response.length > 0) {
+      setHeadlineNews(response[0]); // Set the first article as the headline
+      setOtherNews(response.slice(1)); // Set the remaining articles
+    }
+  };
 
   return (
     <DefaultLayout>
@@ -60,7 +73,7 @@ const HomePage = () => {
           </div>
 
           <div className="mb-7">
-            <HeadlineNewsCard {...mainArticle} />
+            <HeadlineNewsCard {...headlineNews} />
           </div>
 
           <div>
@@ -68,8 +81,8 @@ const HomePage = () => {
               <h2 className="font-inter text-xl font-bold lg:text-2xl">Top Stories</h2>
             </div>
 
-            {topStories.map((story, index) => (
-              <NewsCard key={index} {...story} />
+            {otherNews.map((article, index) => (
+              <NewsCard key={index} {...article} />
             ))}
           </div>
         </div>

@@ -1,0 +1,47 @@
+.
+├── eslint.config.js
+├── folder_structure.txt
+├── index.html
+├── package-lock.json
+├── package.json
+├── public
+│   └── vite.svg
+├── README.md
+├── src
+│   ├── App.tsx
+│   ├── assets
+│   │   ├── images
+│   │   │   └── news1-logo.png
+│   │   └── svgs
+│   │       ├── ai-search-02.svg
+│   │       ├── cancel-circle.svg
+│   │       ├── cancel-icon.svg
+│   │       └── dashboard-square-edit.svg
+│   ├── components
+│   │   ├── FilterPill.tsx
+│   │   ├── HeadlineNewsCard.tsx
+│   │   ├── MoreStoriesCard.tsx
+│   │   ├── NewsCard.tsx
+│   │   ├── SingleNewsContent.tsx
+│   │   └── Tag.tsx
+│   ├── constants
+│   │   ├── endpoints.ts
+│   │   └── query-keys.ts
+│   ├── index.css
+│   ├── layout
+│   │   └── index.tsx
+│   ├── main.tsx
+│   ├── pages
+│   │   ├── IndexPage
+│   │   │   └── index.tsx
+│   │   └── SingleNewsPage
+│   │       └── index.tsx
+│   ├── router
+│   │   └── index.tsx
+│   └── vite-env.d.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+13 directories, 32 files
