@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink } from 'react-router'; // Use `react-router-dom` instead of `react-router`
 import NewsLogo from '../assets/images/news1-logo.png';
 import HamburgerIcon from '../assets/svgs/dashboard-square-edit.svg';
 import CloseIcon from '../assets/svgs/cancel-icon.svg';
@@ -49,16 +49,26 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
             <ul className="flex justify-center gap-x-10">
               {navItems.map((item, index) => (
                 <li key={index}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) =>
-                      `font-inter m-2.5 block text-center text-base font-medium ${
-                        isActive ? 'text-[#0307E4]' : 'text-[#A6A6A6]'
-                      }`
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
+                  {item.to === '/' ? (
+                    // Allow navigation only for the home route
+                    <NavLink
+                      to={item.to}
+                      className={({ isActive }) =>
+                        `font-inter m-2.5 block text-center text-base font-medium ${
+                          isActive ? 'text-[#0307E4]' : 'text-[#A6A6A6]'
+                        }`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  ) : (
+                    // Disable navigation for other routes
+                    <span
+                      className={`font-inter m-2.5 block cursor-not-allowed text-center text-base font-medium text-[#A6A6A6]`}
+                    >
+                      {item.label}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -85,18 +95,27 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
         >
           <div className="mt-24 flex flex-col items-center gap-y-6">
             {navItems.map((item, index) => (
-              <NavLink
-                key={index}
-                to={item.to}
-                className={({ isActive }) =>
-                  `font-inter text-center text-base font-medium ${
-                    isActive ? 'text-[#0307E4]' : 'text-[#A6A6A6]'
-                  }`
-                }
-                onClick={toggleMenu}
-              >
-                {item.label}
-              </NavLink>
+              <div key={index}>
+                {item.to === '/' ? (
+                  // Allow navigation only for the home route
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `font-inter text-center text-base font-medium ${
+                        isActive ? 'text-[#0307E4]' : 'text-[#A6A6A6]'
+                      }`
+                    }
+                    onClick={toggleMenu}
+                  >
+                    {item.label}
+                  </NavLink>
+                ) : (
+                  // Disable navigation for other routes
+                  <span className={`font-inter text-center text-base font-medium text-[#A6A6A6]`}>
+                    {item.label}
+                  </span>
+                )}
+              </div>
             ))}
 
             <div className="mt-10 flex flex-col items-center gap-y-6">

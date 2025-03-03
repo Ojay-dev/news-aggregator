@@ -16,6 +16,10 @@
 │   │       ├── ai-search-02.svg
 │   │       ├── cancel-circle.svg
 │   │       ├── cancel-icon.svg
+│   │       ├── circle-arrow-left-01-grayed.svg
+│   │       ├── circle-arrow-left-01.svg
+│   │       ├── circle-arrow-right-01-grayed.svg
+│   │       ├── circle-arrow-right-01.svg
 │   │       └── dashboard-square-edit.svg
 │   ├── components
 │   │   ├── FilterPill.tsx
@@ -25,8 +29,7 @@
 │   │   ├── SingleNewsContent.tsx
 │   │   └── Tag.tsx
 │   ├── constants
-│   │   ├── endpoints.ts
-│   │   └── query-keys.ts
+│   │   └── endpoints.ts
 │   ├── index.css
 │   ├── layout
 │   │   └── index.tsx
@@ -38,10 +41,14 @@
 │   │       └── index.tsx
 │   ├── router
 │   │   └── index.tsx
+│   ├── services
+│   │   └── newsApiAdapter.ts
+│   ├── types
+│   │   └── article.ts
 │   └── vite-env.d.ts
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
 
-13 directories, 32 files
+15 directories, 37 files
